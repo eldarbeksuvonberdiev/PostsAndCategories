@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('description');
             $table->string('text');
             $table->string('image');
-            $table->string('like');
-            $table->string('dislike');
+            $table->string('like_count');
+            $table->string('dislike_count');
             $table->string('view_count');
             $table->timestamps();
         });
