@@ -16,16 +16,16 @@ class PollController extends Controller
 
     public function store(Request $request){
         Poll::create($request->all());
-        return redirect()->route('poll.index');
+        return redirect()->route('poll.index')->with(['message'=>'Poll is successfully created','status' => 'success']);
     }
 
-    public function detroy(Poll $poll){
+    public function destroy(Poll $poll){
         $poll->delete();
-        return redirect()->route('poll.index');
+        return redirect()->route('poll.index')->with(['message'=>'Poll is successfully deleted','status' => 'danger']);
     }
 
     public function update(Request $request, Poll $poll){
         $poll->update($request->all());
-        return redirect()->route('poll.index');
+        return redirect()->route('poll.index')->with(['message'=>'Poll is successfully updated','status' => 'warning']);
     }
 }
