@@ -27,3 +27,5 @@ Route::post('/option-create/{poll}',[OptionController::class,'store'])->name('op
 Route::get('/user-poll',[PollController::class,'user_index'])->name('user.poll.index');
 
 Route::post('/user-poll-submit/{poll}',[VoteController::class,'poll_sumission'])->name('poll.submit');
+
+Route::get('/statistic/{poll}',[OptionController::class,'statistic'])->name('statistic');

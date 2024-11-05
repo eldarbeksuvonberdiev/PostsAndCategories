@@ -173,7 +173,9 @@
                                             </div>
                                         </td>
                                         <td><span>Coming soon ...</span></td>
-                                        <td>{{ $model->title }}</td>
+                                        <td>
+                                            <a href="{{ route('statistic',$model->id) }}" class="btn btn-info">Statistics</a>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

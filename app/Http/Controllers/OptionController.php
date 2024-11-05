@@ -15,4 +15,8 @@ class OptionController extends Controller
         Option::create(['poll_id'=>$poll->id,'body'=>$request->title]);
         return redirect()->route('poll.index')->with(['message'=>'Option is successfully created','status' => 'success']);
     }
+
+    public function statistic(){
+        return view('adminPages.statistic');
+    }
 }

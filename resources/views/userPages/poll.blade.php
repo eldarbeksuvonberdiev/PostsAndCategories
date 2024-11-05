@@ -6,7 +6,7 @@
     <header id="header" class="header d-flex align-items-center fixed-top">
         <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-            <a href="/" class="logo d-flex align-items-center">
+            <a href="#" class="logo d-flex align-items-center">
                 <h1 class="sitename">Polls</h1>
             </a>
 
@@ -37,7 +37,7 @@
         <section id="blog-posts" class="blog-posts section">
             <div class="container">
                 <div class="row">
-                    <div class="col-6 offset-3">
+                    <div class="col-6 offset-3 mb-3">
                         <h3>
                             {{ $models->title }}
                         </h3>
@@ -57,6 +57,13 @@
                             <button class="btn btn-primary" type="submit">Submit</button>
                         </form>
                     </div>
+                    @if (session('status') & session('message'))
+                        <div class="alert alert-{{ session('status') }} alert-dismissible fade show" role="alert">
+                            <strong>{{ session('message') }}</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                aria-label="Close"></button>
+                        </div>
+                    @endif
                 </div>
             </div>
 
