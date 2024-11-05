@@ -28,4 +28,9 @@ class PollController extends Controller
         $poll->update($request->all());
         return redirect()->route('poll.index')->with(['message'=>'Poll is successfully updated','status' => 'warning']);
     }
+
+    public function user_index(){
+        $models = Poll::where('is_active','1')->orderBy('created_at','desc')->first();
+        return view('userPages.poll',['models'=>$models]);
+    }
 }

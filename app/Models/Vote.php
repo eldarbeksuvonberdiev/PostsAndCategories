@@ -11,4 +11,12 @@ class Vote extends Model
         'option_id',
         'voter_ip'
     ];
+
+    public function poll(){
+        return $this->belongsTo(Poll::class,'poll_id');
+    }
+
+    public function option(){
+        return $this->belongsTo(Option::class,'option_id');
+    }
 }

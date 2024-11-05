@@ -4,6 +4,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OptionController;
 use App\Http\Controllers\PollController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\VoteController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
@@ -23,3 +24,6 @@ Route::delete('/poll-delete/{poll}',[PollController::class,'destroy'])->name('po
 
 Route::post('/option-create/{poll}',[OptionController::class,'store'])->name('option.create');
 
+Route::get('/user-poll',[PollController::class,'user_index'])->name('user.poll.index');
+
+Route::post('/user-poll-submit/{poll}',[VoteController::class,'poll_sumission'])->name('poll.submit');
