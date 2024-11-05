@@ -12,21 +12,27 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/',[CategoryController::class,'index']);
+
+Route::get('/', [CategoryController::class, 'index']);
+Route::post('/category-create', [CategoryController::class, 'store'])->name('category.create');
+Route::put('/category-edit/{id}', [CategoryController::class, 'update'])->name('category.edit');
+Route::delete('/category-delete/{category}', [CategoryController::class, 'destroy'])->name('category.delete');
 
 
-Route::get('/post',[PostController::class,'index']);
 
 
-Route::get('/poll',[PollController::class,'index'])->name('poll.index');
-Route::post('/poll-create',[PollController::class,'store'])->name('poll.create');
-Route::put('/poll-edit/{poll}',[PollController::class,'update'])->name('poll.edit');
-Route::delete('/poll-delete/{poll}',[PollController::class,'destroy'])->name('poll.delete');
+Route::get('/post', [PostController::class, 'index']);
 
-Route::post('/option-create/{poll}',[OptionController::class,'store'])->name('option.create');
 
-Route::get('/user-poll',[PollController::class,'user_index'])->name('user.poll.index');
+Route::get('/poll', [PollController::class, 'index'])->name('poll.index');
+Route::post('/poll-create', [PollController::class, 'store'])->name('poll.create');
+Route::put('/poll-edit/{poll}', [PollController::class, 'update'])->name('poll.edit');
+Route::delete('/poll-delete/{poll}', [PollController::class, 'destroy'])->name('poll.delete');
 
-Route::post('/user-poll-submit/{poll}',[VoteController::class,'poll_sumission'])->name('poll.submit');
+Route::post('/option-create/{poll}', [OptionController::class, 'store'])->name('option.create');
 
-Route::get('/statistic/{poll}',[OptionController::class,'statistic'])->name('statistic');
+Route::get('/user-poll', [PollController::class, 'user_index'])->name('user.poll.index');
+
+Route::post('/user-poll-submit/{poll}', [VoteController::class, 'poll_sumission'])->name('poll.submit');
+
+Route::get('/statistic/{poll}', [OptionController::class, 'statistic'])->name('statistic');
