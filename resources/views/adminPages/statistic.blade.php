@@ -6,6 +6,7 @@
 @section('content')
     <div class="row">
         <div class="col-8 offset-2">
+            
             <div>
                 <canvas id="myChart"></canvas>
             </div>
@@ -16,13 +17,13 @@
                 const ctx = document.getElementById('myChart');
 
                 new Chart(ctx, {
-                    type: 'bar',
+                    type: 'line',
                     data: {
-                        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                        labels: @json($options),
                         datasets: [{
                             label: '# of Votes',
-                            data: [12, 19, 3, 5, 2, 3],
-                            borderWidth: 4
+                            data: @json($votes),
+                            borderWidth: 3
                         }]
                     },
                     options: {

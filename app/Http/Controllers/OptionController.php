@@ -16,7 +16,9 @@ class OptionController extends Controller
         return redirect()->route('poll.index')->with(['message'=>'Option is successfully created','status' => 'success']);
     }
 
-    public function statistic(){
-        return view('adminPages.statistic');
+    public function statistic(Poll $poll){
+        $options = $poll->options()->pluck('body');
+        $votes = $poll->options()->withCount('votes')->pluck('votes_count');
+        return view('adminPages.statistic',['options'=>$options,'votes'=>$votes]);
     }
 }

@@ -13,11 +13,11 @@ class Poll extends Model
         'is_active'
     ];
 
-    public function option(){
+    public function options(){
         return $this->hasMany(Option::class,'poll_id');
     }
 
-    public function vote(){
+    public function votes(){
         return $this->hasMany(Vote::class,'poll_id');
     }
 }

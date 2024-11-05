@@ -5,6 +5,7 @@ use App\Http\Controllers\OptionController;
 use App\Http\Controllers\PollController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\VoteController;
+use App\Http\Middleware\AdminCheck;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
