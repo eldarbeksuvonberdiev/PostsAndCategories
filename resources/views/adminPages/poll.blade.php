@@ -1,10 +1,10 @@
 @extends('layouts.admin_main')
 
-@section('title', 'Post')
-@section('pagename', 'Post')
+@section('title', 'Poll')
+@section('pagename', 'Poll')
 
 @section('content')
-    {{-- <section class="content">
+    <section class="content">
         @if ($errors->any())
             @foreach ($errors->all() as $error)
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -20,37 +20,22 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Post Creation</h1>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Poll Creation</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ route('post.create') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('poll.create') }}" method="POST">
                             @csrf
-                            <div class="mb-3">
-                                <select class="form-select" name="category_id" aria-label="Default select example">
-                                    @foreach ($categories as $category)
-                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
                             <div class="mb-3">
                                 <label for="name" class="form-label">Title</label>
                                 <input type="text" class="form-control" name="title" id="name"
-                                    placeholder="Jahon yangiliklari...">
+                                    placeholder="nimadir...">
                             </div>
                             <div class="mb-3">
-                                <label for="name" class="form-label">Description</label>
-                                <input type="text" class="form-control" name="description" id="name"
-                                    placeholder="Jahon yangiliklari...">
-                            </div>
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Body</label>
-                                <input type="text" class="form-control" name="body" id="name"
-                                    placeholder="Jahon yangiliklari...">
-                            </div>
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Image</label>
-                                <input type="file" class="form-control" name="image" id="name">
+                                <select class="form-select" name="is_active" aria-label="Default select example">
+                                    <option value="1">Active</option>
+                                    <option value="0">Inactive</option>
+                                  </select>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -73,10 +58,9 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Title</th>
-                                    <th>Description</th>
-                                    <th>Image</th>
                                     <th>Edit</th>
                                     <th>Delete</th>
+                                    <th>Statistics</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -84,8 +68,6 @@
                                     <tr>
                                         <td>{{ $model->id }}</td>
                                         <td>{{ $model->title }}</td>
-                                        <td>{{ $model->description }}</td>
-                                        <td><img src="{{ $model->image }}" alt="" width="100px"></td>
                                         <td>
                                             <button type="button" class="btn btn-warning" data-bs-toggle="modal"
                                                 data-bs-target="#edit{{ $model->id }}">
@@ -102,25 +84,10 @@
                                                                 aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <form action="{{ route('post.edit', $model->id) }}"
+                                                            <form action="{{ route('poll.edit', $model->id) }}"
                                                                 method="POST" enctype="multipart/form-data">
                                                                 @csrf
                                                                 @method('PUT')
-
-                                                                <div class="mb-3">
-                                                                    <select class="form-select" name="category_id"
-                                                                        aria-label="Default select example">
-                                                                        <option value="{{ $model->category_id }}">
-                                                                            {{ $model->category->name }}</option>
-                                                                        @foreach ($categories as $category)
-                                                                            @if ($category->id == $model->category_id)
-                                                                                {{ 'continiue' }}
-                                                                            @endif
-                                                                            <option value="{{ $category->id }}">
-                                                                                {{ $category->name }}</option>
-                                                                        @endforeach
-                                                                    </select>
-                                                                </div>
                                                                 <div class="mb-3">
                                                                     <label for="name" class="form-label">Title</label>
                                                                     <input type="text" class="form-control"
@@ -129,24 +96,10 @@
                                                                         value="{{ $model->title }}">
                                                                 </div>
                                                                 <div class="mb-3">
-                                                                    <label for="name"
-                                                                        class="form-label">Description</label>
-                                                                    <input type="text" class="form-control"
-                                                                        name="description" id="name"
-                                                                        value="{{ $model->description }}"
-                                                                        placeholder="Jahon yangiliklari...">
-                                                                </div>
-                                                                <div class="mb-3">
-                                                                    <label for="name" class="form-label">Body</label>
-                                                                    <input type="text" class="form-control"
-                                                                        value="{{ $model->body }}" name="body"
-                                                                        id="name"
-                                                                        placeholder="Jahon yangiliklari...">
-                                                                </div>
-                                                                <div class="mb-3">
-                                                                    <label for="name" class="form-label">Image</label>
-                                                                    <input type="file" class="form-control"
-                                                                        name="image" id="name">
+                                                                    <select class="form-select" name="is_active" aria-label="Default select example">
+                                                                        <option value="1" {{ $model->is_active == 1 ? 'selected' : '' }}>Active</option>
+                                                                        <option value="0" {{ $model->is_active == 0 ? 'selected' : '' }}>Inactive</option>
+                                                                      </select>
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary"
@@ -162,13 +115,14 @@
                                         </td>
                                         <td>
                                             <div>
-                                                <form action="{{ route('post.delete', $model->id) }}" method="POST">
+                                                <form action="{{ route('poll.delete', $model->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button class="btn btn-danger" type="submit">Delete</button>
                                                 </form>
                                             </div>
                                         </td>
+                                        <td>{{ $model->title }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -178,5 +132,5 @@
                 {{ $models->links() }}
             </div>
         </div>
-    </section> --}}
+    </section>
 @endsection

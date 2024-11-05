@@ -4,11 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Poll extends Model
+class Vote extends Model
 {
-    
     protected $fillable = [
-        'title',
-        'is_active'
+        'poll_id',
+        'option_id',
+        'voter_ip'
     ];
 }
